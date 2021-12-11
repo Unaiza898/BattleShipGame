@@ -1,0 +1,532 @@
+package application;
+
+
+import java.util.ArrayList;
+import java.util.Random;
+
+import javafx.scene.paint.Color;
+
+public class Computer extends Player{
+
+	
+// private Board  board = new Board (box,true);
+    public String errormessage; // send an error message for the user
+    // store the ships name and health in an array
+    // stor the coordinates of the ships
+
+    private ArrayList<Integer> randomnum = new ArrayList<Integer>();
+   // stores in the boxes number in the grid and make sure it doesnt repeat it.    
+    
+    String[] shipnames = {"Destroyer",  "Submarine", "Cruiser", "Battleship", "Carrier"} ;
+    int[] shiphealths = {1,2,3,4,5 };
+    int noofShip = 1;
+    
+    
+   /**
+    * This contructor initializes the board for the computer player
+    */
+	@Override
+	public Board createBoard() {
+		// TODO Auto-generated method stub
+		
+	
+//	board.setAllColors();
+		return board ;
+	}
+	
+	
+	
+	
+	/**
+	 *  Intializes the ships into random positions (vertical only)
+	 *  check if the bounds of the shop coordinates doesnt go out
+	 *  of bounds
+	 *  
+	 *  returns a bool.
+	 *  if true all ships are initialize 
+	 *  else false;
+	 */
+ 
+	public boolean initializeShip(ships ship) {
+		
+
+		 // increment the no of ship as it initiallize it		
+		
+		if(noofShip == 1) {
+			int num = (int) (Math.random()*100); // pick random numbers
+			
+			randomnum.add(num);
+			randomnum.add(num +10);
+			randomnum.add(num -10);
+			int x = (int) board.boxarray[num].getX();
+			int y = (int) board.boxarray[num].getY();
+		  board.setColorscoordinate(x, y, 'C');
+		  if(x != 0)
+		  {
+			  board.setColorscoordinate(x-1, y, 'X');
+		  }
+		  if(x != 9)
+		  {
+			  board.setColorscoordinate(x+1, y, 'X');
+		  }
+		
+			System.out.print("num = " + num + "x = " + x + " y =  " + y +  board.getAllColors(x, y) + " "); 
+		
+			
+			int [] point = {x,y};
+		    coords.add(point);
+			shipsList.add(new ships("Destroyer",1));
+		    ship.coordinates.put(coords,"Destroyer");
+			
+		}
+		
+		coords.clear();
+		noofShip++;
+
+        board.printColors(10);
+		
+        if(noofShip == 2) {
+        
+        	boolean initialship = false;
+//			 int  num = (int) (Math.random()*100);
+		      int  x = (int) (Math.random()*8);
+	           	int y =  (int) (Math.random()*10);
+	           	
+	           	
+	           
+	      
+			while (initialship == false  ){
+		if((board.getAllColors(x , y) == 'C' ) ||(board.getAllColors(x , y) == 'X' ) ){
+			
+			
+			    x = (int) (Math.random()*8);
+	            y =  (int) (Math.random()*10);
+			
+			
+		}
+		
+		if((board.getAllColors(x +1 , y) != 'B' ))
+		{
+			board.setColorscoordinate(x+1, y, 'X');
+		    x = (int) (Math.random()*8);
+            y =  (int) (Math.random()*10);
+          
+		}
+		
+		
+		else {
+			initialship = true;
+		}
+		
+		
+//				num = RandomNumbers(0,100, randomnum);
+			
+			}
+			
+			
+			
+			
+			
+			
+			  if(x != 0)
+			  {
+				  board.setColorscoordinate(x-1, y, 'X');
+			  }
+	
+//			randomnum.add(num);
+	    int []  point = {x,y};
+			 coords.add(point);
+
+			 board.setColorscoordinate(x, y, 'C');
+			 x += 1;
+			 board.setColorscoordinate(x, y, 'C');
+//			 randomnum.add(num);
+		       point[0] = x;
+		      coords.add(point);
+		     if(x != 9)
+			  {
+				  board.setColorscoordinate(x+1, y, 'X');
+			  }
+			shipsList.add(new ships("Submarine",2));
+		    ship.coordinates.put(coords,"Submarine");
+			noofShip++;
+		}
+		
+        
+        System.out.println();
+        coords.clear();
+		
+
+        board.printColors(10);
+		
+		
+        
+        
+        if(noofShip == 3) {
+        	
+        	
+        	boolean shipdone =  false;
+            
+		     int  x = (int) (Math.random()*6);
+	           	int y =  (int) (Math.random()*10);
+
+			while (shipdone ==  false){
+		if((board.getAllColors(x , y) == 'C' ) ||(board.getAllColors(x , y) == 'X' ) ){
+					
+					
+				    x = (int) (Math.random()*6);
+		            y =  (int) (Math.random()*10);
+				
+				
+			}
+			
+			if((board.getAllColors(x +1 , y) != 'B' ))
+			{
+                  board.setColorscoordinate(x+1, y, 'X');
+			    x = (int) (Math.random()*6);
+	            y =  (int) (Math.random()*10);
+	            
+			}
+			
+			if((board.getAllColors(x +2 , y) != 'B' ))
+			{
+		      board.setColorscoordinate(x+2, y, 'X');
+			    x = (int) (Math.random()* 6);
+	            y =  (int) (Math.random()*10);
+	     
+			}
+			
+			if((board.getAllColors(x +2 , y) == 'B' ) && (board.getAllColors(x +1 , y) == 'B' ))
+			{
+		
+				shipdone =  true;
+			}
+				}
+			
+//			randomnum.add(num);
+	    int []  point = {x,y};
+			 coords.add(point);
+			 board.setColorscoordinate(x, y, 'C');
+			 x += 1;
+			 board.setColorscoordinate(x, y, 'C');
+//			 randomnum.add(num);
+		       point[0] = x;
+		      coords.add(point);
+		 	 x += 1;
+			 board.setColorscoordinate(x, y, 'C');
+//			 randomnum.add(num);
+		       point[0] = x;
+		      coords.add(point);
+		      
+		      
+			shipsList.add(new ships("Cruiser",3));
+		    ship.coordinates.put(coords,"Cruiser");
+			noofShip++;
+		}
+		
+        
+        System.out.println();
+        coords.clear();
+		
+
+        board.printColors(10);
+        if(noofShip == 4) {
+            
+        	int num = RandomNumbers(0,100, randomnum);
+   			int x = (int) board.boxarray[num].getX();
+   			int y = (int) board.boxarray[num].getY();
+   			while ( (x > 6) ||( y > 6)){
+                
+				if(x +3 < 9 ) {
+					
+			
+					if(( board.getAllColors(x +1 , y)  != 'B'))
+					{
+						randomnum.add(num);
+				    num = RandomNumbers(0,100, randomnum);;
+			        x = (int) board.boxarray[num].getX();
+		           	y = (int) board.boxarray[num].getY();
+					}
+					
+					if(( board.getAllColors(x +2 , y)  != 'B'))
+					{
+						randomnum.add(num);
+				    num = RandomNumbers(0,100, randomnum);
+			        x = (int) board.boxarray[num].getX();
+		           	y = (int) board.boxarray[num].getY();
+					}
+					if(( board.getAllColors(x +3 , y)  != 'B'))
+					{
+						randomnum.add(num);
+				    num = RandomNumbers(0,100, randomnum);
+			        x = (int) board.boxarray[num].getX();
+		           	y = (int) board.boxarray[num].getY();
+					}
+				}
+				
+				else {
+					randomnum.add(num);
+				  num = RandomNumbers(0,100, randomnum);
+			        x = (int) board.boxarray[num].getX();
+		           	y = (int) board.boxarray[num].getY();
+				}
+   				
+   			}
+   			
+   			randomnum.add(num);
+   	    int []  point = {x,y};
+   			 coords.add(point);
+   			 board.setColorscoordinate(x, y, 'C');
+   			System.out.print("num = " + num + "x = " + x + " y =  " + y +  board.getAllColors(x, y) + " "); 
+   			
+   			 x += 1;
+   			 board.setColorscoordinate(x, y, 'C');
+   			 randomnum.add(num);
+   		       point[0] = x;
+   		      coords.add(point);
+   			 x += 1;
+   			 board.setColorscoordinate(x, y, 'C');
+   			 randomnum.add(num);
+   		       point[0] = x;
+   		      coords.add(point);
+   			 x += 1;
+   			 board.setColorscoordinate(x, y, 'C');
+   			 randomnum.add(num);
+   		       point[0] = x;
+   		      coords.add(point);
+   			shipsList.add(new ships("Battleship",4));
+   		    ship.coordinates.put(coords,"Battleship");
+   			noofShip++;
+   		}
+		
+        System.out.println();
+        coords.clear();
+		
+
+        board.printColors(10);
+
+        if(noofShip == 5) {
+            
+        	int num = RandomNumbers(0,100, randomnum);
+   			int x = (int) board.boxarray[num].getX();
+   			int y = (int) board.boxarray[num].getY();
+   			while ( (x > 9)|| ( y > 9) ){
+   				
+   				
+   				if(x +4 < 9) {
+					if(( board.getAllColors(x +1 , y)  != 'B'))
+					{
+						randomnum.add(num);
+				    num = RandomNumbers(0,100, randomnum);;
+			        x = (int) board.boxarray[num].getX();
+		           	y = (int) board.boxarray[num].getY();
+					}
+					
+					if(( board.getAllColors(x +2 , y)  != 'B'))
+					{
+						randomnum.add(num);
+				    num = RandomNumbers(0,100, randomnum);
+			        x = (int) board.boxarray[num].getX();
+		           	y = (int) board.boxarray[num].getY();
+					}
+					if(( board.getAllColors(x +3 , y)  != 'B'))
+					{
+						randomnum.add(num);
+				    num = RandomNumbers(0,100, randomnum);
+			        x = (int) board.boxarray[num].getX();
+		           	y = (int) board.boxarray[num].getY();
+					}
+				}
+				
+				else {
+					randomnum.add(num);
+				  num = RandomNumbers(0,100, randomnum);
+			        x = (int) board.boxarray[num].getX();
+		           	y = (int) board.boxarray[num].getY();
+				}
+   		
+   			}
+   			
+   			
+   			
+   			
+   			randomnum.add(num);
+   	    int []  point = {x,y};
+   			 coords.add(point);
+   			 board.setColorscoordinate(x, y, 'C');
+   			System.out.print("num = " + num + "x = " + x + " y =  " + y +  board.getAllColors(x, y) + " "); 
+   			
+   			 x += 1;
+   			 board.setColorscoordinate(x, y, 'C');
+   			 randomnum.add(num);
+   		       point[0] = x;
+   		      coords.add(point);
+   			 x += 1;
+   			 board.setColorscoordinate(x, y, 'C');
+   			 randomnum.add(num);
+   		       point[0] = x;
+   		      coords.add(point);
+   			 x += 1;
+   			 board.setColorscoordinate(x, y, 'C');
+   			 randomnum.add(num);
+   		       point[0] = x;
+   		      coords.add(point);
+   		     x += 1;
+ 			 board.setColorscoordinate(x, y, 'C');
+ 			 randomnum.add(num);
+ 		       point[0] = x;
+ 		      coords.add(point);
+   			shipsList.add(new ships("Carrier",5));
+   		    ship.coordinates.put(coords,"Carrier");
+   			
+   		}
+        System.out.println();
+        coords.clear();
+
+        board.printColors(10);
+		
+        
+        
+        if(noofShip == 5)
+        {
+        	
+        	System.out.println("wohooo");
+        	return true ;
+        }
+        
+        else 
+        {
+        	System.out.println("wohooo");
+        	return false;
+        }
+        	
+        
+        		
+		
+	}
+
+	
+	
+	
+//	public boolean itsahit(int x, int y,) {
+//		
+//		if(a[x][y] == 'A')
+//		{
+//			return true; 
+//		}
+//		else
+//		{
+//		return false;
+//		}
+//	}
+//	
+	
+	
+	
+
+//	public boolean itsahit(int x, int y,char[][] a) {
+//		
+//		if(a[x][y] == 'A')
+//		{
+//			return true; 
+//		}
+//		else
+//		{
+//		return false;
+//		}
+//	}
+	
+//	public char[][] aiThinking(char[][] g)
+//	{
+//		
+//		Random r = new Random();
+//		int x;
+//		int y;
+//		
+//		x = r.nextInt(10);
+//		y = r.nextInt(10);
+//		
+//		int loop = 5;
+//		
+//		while(loop != 5)
+//		{
+//			
+//		}
+//		
+//		
+//		
+//		
+//		
+//		return g;
+//	}
+//	
+
+	
+	/**
+	 * exclude the numbers/ boxes that already ahve a ship 
+	 * @param start
+	 * @param end
+	 * @param numbers
+	 * @return
+	 */
+	public int RandomNumbers(int start, int end, ArrayList<Integer> numbers) {
+	    Random rand = new Random();
+	    int range = end - start + 1;
+	    int random = 0;
+
+	    boolean success = false;
+	    while(!success) {
+	        random = rand.nextInt(range) + 1;
+	        for(Integer i:numbers) {
+	            if(i == random) {
+	                break;
+	            } else if (i > random) {
+	                success = true;
+	                break;
+	            }
+	        }
+	    }
+	    return random;
+	}
+	
+public void itsahit(int x,int y, Player other ){
+		
+//		boolean hit = false;
+//	System.out.println(board.getAllColors(x, y));	
+//	 box.setX(x);
+//	 box.setY(y);
+	
+//	
+//	     box = new box(x,y);
+		if(other.board.getAllColors(x, y) == 'A')
+		{
+			
+			
+			other.board.boxarray[1].setFill(Color.BLACK);
+		}
+		
+		
+		else {
+			
+			
+			other.board.boxarray[1].setFill(Color.BLACK);
+			
+			System.out.println(board.boxarray[5].getX() + " " + board.boxarray[5].getY() );
+	
+		//	System.out.println
+			
+		System.out.println("you missed!!.");
+			
+			
+		}
+		
+		
+		
+	}
+
+
+
+
+	
+	
+}
