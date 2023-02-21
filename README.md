@@ -4,9 +4,6 @@ Battleship is a strategy type guessing game for two players. It is played on rul
 The locations of the fleets are concealed from the other player.
 
 
-# BattleShipGame Demo 
-
-
 
 
 # UML Diagram 
